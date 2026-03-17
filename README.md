@@ -98,3 +98,56 @@ SystemCenterConfigManager        :
 WindowsUpdateAutoUpdate          : True
 IsRebootPending                  : True
 ```
+
+
+## Overview & Purpose
+
+This project provides a PowerShell module for determining whether a Windows system has a pending reboot. It allows administrators and automation scripts to quickly detect if a reboot is required after updates, configuration changes, or other maintenance tasks.
+
+
+## Features & Tech Stack
+
+**Key Features**
+
+- PowerShell functions to test for pending reboots on local or remote computers
+- Checks multiple indicators: Component Based Servicing, Computer Rename Domain Join, File Rename operations, System Center Configuration Manager client state, Windows Update Automatic Update status, and registry values
+- Ability to skip specific checks for faster execution
+- Outputs detailed status information for each check
+
+**Tech Stack**
+
+| Component | Description |
+| --- | --- |
+| Language | PowerShell |
+| Platform | Windows |
+| Dependencies | WMI and registry access via PowerShell |
+
+
+## Installation & Usage
+
+1. Clone or download this repository to your local machine.
+2. Import the module into your PowerShell session:
+
+   ```powershell
+   Import-Module .\PendingReboot.psm1
+   ```
+3. Use the `Test-PendingReboot` function to check the pending reboot status. For example:
+
+   ```powershell
+   # Check the local machine
+   Test-PendingReboot -Detailed
+
+   # Check a remote computer named "DC01"
+   Test-PendingReboot -ComputerName DC01 -Detailed
+   ```
+
+These commands return a structured object indicating which reboot indicators are present.
+
+
+## Business & Entrepreneurial Value
+
+An accurate pending reboot detector is valuable for businesses that manage fleets of Windows machines. Integrating this module into automation pipelines allows IT teams to schedule reboots strategically, reducing downtime and improving compliance with patching policies. Companies offering remote management, monitoring, or patching services can bundle this capability as part of a paid subscription, upsell advanced reporting features, or license it for inclusion in larger automation platforms. The solution scales to enterprise environments and can integrate with configuration management systems to drive data‑driven insights about reboot requirements.
+
+## Consumer Value
+
+For system administrators and end users, this module provides an easy way to understand when a reboot is necessary. By consolidating multiple checks into a single command, it saves time compared with manually inspecting registry keys or update logs. Users benefit from more reliable systems, reduced unexpected reboots, and the transparency of knowing exactly why a reboot is required. The script is easy to run, requires no external dependencies beyond PowerShell, and respects privacy by running locally or against trusted remote hosts.
